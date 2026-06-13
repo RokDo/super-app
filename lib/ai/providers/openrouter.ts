@@ -1,9 +1,9 @@
 import { z, type ZodSchema } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import { getAIConfig } from "../config.js";
-import { AIError, toAIError } from "../errors.js";
-import { createModelRegistry, selectModel } from "../models.js";
-import type { AICapability, AIContentPart, AIProvider, AIRequestOptions, AIResponse, AIStreamEvent } from "../types.js";
+import { getAIConfig } from "../config";
+import { AIError, toAIError } from "../errors";
+import { createModelRegistry, selectModel } from "../models";
+import type { AICapability, AIContentPart, AIProvider, AIRequestOptions, AIResponse, AIStreamEvent } from "../types";
 
 export type OpenRouterOptions = { providerOrder?: string[]; allowFallbacks?: boolean; requireParameters?: boolean; dataCollection?: "allow" | "deny"; zeroDataRetentionOnly?: boolean; maxPrice?: { prompt?: number; completion?: number } };
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));

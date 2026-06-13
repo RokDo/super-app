@@ -1,7 +1,7 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import fs from 'node:fs';
 import { getPublicEnv } from '../lib/config/env';
-import { createOpenRouterProvider } from '../lib/ai/providers/openrouter.js';
+import { createOpenRouterProvider } from '../lib/ai/providers/openrouter';
 
 describe('production readiness', () => {
   const original = { ...process.env };

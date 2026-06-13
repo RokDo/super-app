@@ -1,4 +1,4 @@
-import { AIError } from "./errors.js";
+import { AIError } from "./errors";
 export type AIProviderName = "openrouter" | "openai-compatible" | "mock";
 const bool = (v: string | undefined, d: boolean) => v == null || v === "" ? d : v === "true";
 const num = (v: string | undefined) => v ? Number(v) : undefined;

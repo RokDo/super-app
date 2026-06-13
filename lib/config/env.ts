@@ -1,8 +1,8 @@
 export type AppMode = 'demo' | 'production';
 const validUrl = (v?: string) => !!v && /^https:\/\/[a-zA-Z0-9-]+\.supabase\.co$/.test(v);
-const publicSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const publicSupabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export function getPublicEnv() {
+  const publicSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const publicSupabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   const supabaseConfigured = validUrl(publicSupabaseUrl) && !!publicSupabaseAnonKey;
   return {
     mode: (supabaseConfigured ? 'production' : 'demo') as AppMode,

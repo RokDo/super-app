@@ -1,11 +1,11 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { z } from "zod";
-import { createMockProvider } from "../lib/ai/providers/mock.js";
-import { buildOpenRouterRequest, normalizeOpenRouterMessageContent, normalizeOpenRouterResponse, createOpenRouterProvider } from "../lib/ai/providers/openrouter.js";
-import { selectModel } from "../lib/ai/models.js";
-import { enforceBudget } from "../lib/ai/usage.js";
-import { buildPrivacyFilteredContext } from "../lib/ai/services/privacy-context.js";
-import { AIError } from "../lib/ai/errors.js";
+import { createMockProvider } from "../lib/ai/providers/mock";
+import { buildOpenRouterRequest, normalizeOpenRouterMessageContent, normalizeOpenRouterResponse, createOpenRouterProvider } from "../lib/ai/providers/openrouter";
+import { selectModel } from "../lib/ai/models";
+import { enforceBudget } from "../lib/ai/usage";
+import { buildPrivacyFilteredContext } from "../lib/ai/services/privacy-context";
+import { AIError } from "../lib/ai/errors";
 
 const messages = [{ role: "user" as const, content: "hi" }];
 const env = { AI_PROVIDER: "openrouter", OPENROUTER_API_KEY: "key", AI_FAST_MODEL: "fast", AI_REASONING_MODEL: "reason", AI_VISION_MODEL: "vision", AI_FALLBACK_MODEL: "fallback" };

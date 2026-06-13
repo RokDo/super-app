@@ -1,2 +1,2 @@
-import { ai } from "../client.js";
+import { ai } from "../client";
 export { ai };
