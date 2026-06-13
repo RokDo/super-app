@@ -1,0 +1,1 @@
+-- Development seed data is created by the demo repository in browser storage. Insert authenticated-user rows here after creating a local Supabase user.
