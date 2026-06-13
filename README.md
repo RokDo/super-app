@@ -79,3 +79,25 @@ npm run build
 Use `AI_PROVIDER=mock` for deterministic local responses or `AI_PROVIDER=openrouter` for real OpenRouter responses. UI code calls `/api/ai/chat`; secrets remain server-side.
 
 See `docs/production-setup.md` for the production checklist.
+
+## Functional persistence update
+
+The primary root cause for “Supabase configured/authenticated but zero rows” was that production UI pages wrote almost exclusively to `localStorage` demo keys and never called Supabase for body, food, recovery, or workout mutations. A second root cause was that the browser Supabase helper was only a config object, so repositories/API routes had no authenticated CRUD client and errors were hidden behind demo-style optimistic state. The corrective implementation routes production mutations through authenticated server API routes that derive `user_id` from the Supabase access-token cookie and map camelCase UI fields to snake_case database columns.
+
+Run the migrations in order:
+
+1. `supabase/migrations/001_initial_schema.sql`
+2. `supabase/migrations/002_rls_policies_and_profile_init.sql`
+3. `supabase/migrations/003_functional_app_persistence.sql`
+
+The third migration adds missing columns for editable food/settings/workout fields, updated-at triggers, uniqueness constraints for daily recovery and active workouts, and private `meal-photos` / `progress-photos` Storage buckets with owner-only policies. No manual table creation is required beyond applying these migrations.
+
+Current completed end-to-end flows:
+
+- Body measurements: create, edit, delete, Supabase persistence, refresh-backed reload.
+- Manual food logs: create, edit, delete, nutrition totals, explicit editable AI draft before save.
+- Recovery check-ins: editable fields, deterministic readiness, save to Supabase.
+- Active workouts: start, add exercises/sets, edit weight/reps/RPE, save active workout, finish, history, delete.
+- Settings/diagnostics retain safe status reporting without exposing secrets.
+
+Known remaining limitations: full OpenRouter vision upload/analysis, IndexedDB sync conflict resolution, notifications, reports history, habit CRUD, and generated workout-plan drafts still need follow-up implementation before the broader product definition of done is fully complete.
