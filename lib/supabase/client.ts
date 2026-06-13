@@ -1,0 +1,1 @@
+import{getPublicEnv}from'../config/env';export function isSupabaseAvailable(){return getPublicEnv().supabaseConfigured}export function createBrowserSupabaseClient(){if(!isSupabaseAvailable())return null;throw new Error('Install @supabase/supabase-js and provide credentials to enable production Supabase mode.')}

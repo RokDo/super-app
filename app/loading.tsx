@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="content"><section className="card"><p className="eyebrow">Loading</p><div className="metric">Preparing your dashboard…</div></section></main>}
