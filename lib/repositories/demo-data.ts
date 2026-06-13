@@ -1,0 +1,6 @@
+import type{BodyMeasurement,FoodEntry,RecoveryCheckin,WorkoutSession}from'../calculations/types';
+export const demoFoods:FoodEntry[]=[{id:'f1',meal:'breakfast',name:'Greek yogurt, berries and oats',calories:420,protein:34,carbs:52,fat:9,fiber:8},{id:'f2',meal:'lunch',name:'Chicken rice bowl',calories:690,protein:52,carbs:78,fat:18,fiber:7},{id:'f3',meal:'snacks',name:'Protein shake',calories:180,protein:30,carbs:6,fat:3,fiber:1}];
+export const demoBody:BodyMeasurement[]=[76.8,76.6,76.4,76.2,76.3,76.1,75.9].map((w,i)=>({id:`b${i}`,date:new Date(Date.now()-(6-i)*864e5).toISOString(),weightKg:w,waistCm:84-i*.1,bodyFatPercent:16.5-i*.05}));
+export const demoRecovery:RecoveryCheckin={sleepHours:7.1,sleepQuality:4,energy:4,stress:2,motivation:4,soreness:2,pain:false,notes:'Slept well, mild leg soreness.'};
+export const demoWorkout:WorkoutSession={id:'w1',date:new Date().toISOString(),durationMinutes:62,exercises:[{name:'Bench press',sets:[{weight:80,reps:6,type:'working'},{weight:80,reps:6,type:'working'}]},{name:'Row',sets:[{weight:70,reps:10,type:'working'}]}]};
+export const demoPlan={name:'Upper / Lower Strength',days:[{name:'Upper',exercises:['Bench press','Row','Overhead press','Pull-up']},{name:'Lower',exercises:['Squat','Romanian deadlift','Lunge','Calf raise']}]} as const;
