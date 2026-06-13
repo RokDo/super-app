@@ -1,0 +1,1 @@
+import { NextResponse } from 'next/server';import { getAccessToken } from '../../../../lib/auth/session';import { getPublicEnv } from '../../../../lib/config/env';export async function GET(){const env=getPublicEnv();return NextResponse.json({mode:env.mode,authenticated:env.mode==='demo'||!!await getAccessToken()})}

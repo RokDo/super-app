@@ -1,0 +1,6 @@
+import { getPublicEnv } from '../config/env';
+export type SupabaseSession = { access_token: string; refresh_token?: string; user: { id: string; email?: string; user_metadata?: Record<string, unknown> } };
+export function isSupabaseAvailable() { return getPublicEnv().supabaseConfigured; }
+export function getSupabasePublicConfig() { const env = getPublicEnv(); return { url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? '', anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '', configured: env.supabaseConfigured }; }
+export function createBrowserSupabaseClient() { const cfg = getSupabasePublicConfig(); if (!cfg.configured) return null; return { url: cfg.url, anonKey: cfg.anonKey }; }
+export async function supabaseAuthRequest<T>(path: string, init: RequestInit = {}): Promise<T> { const cfg = getSupabasePublicConfig(); if (!cfg.configured) throw new Error('Supabase is not configured. Demo mode is active.'); const res = await fetch(`${cfg.url}/auth/v1/${path}`, { ...init, headers: { apikey: cfg.anonKey, 'content-type': 'application/json', ...(init.headers ?? {}) } }); const json = await res.json().catch(() => ({})); if (!res.ok) throw new Error(typeof json?.msg === 'string' ? json.msg : typeof json?.error_description === 'string' ? json.error_description : `Supabase auth request failed (${res.status})`); return json as T; }

@@ -1,0 +1,1 @@
+'use client';export default function Error({error,reset}:{error:Error;reset:()=>void}){return <main className="content"><section className="card"><p className="eyebrow">Something went wrong</p><h1>Super App could not render this screen.</h1><p className="muted">{error.message}</p><button className="btn" onClick={reset}>Try again</button></section></main>}

@@ -1,0 +1,1 @@
+import{NextResponse}from'next/server';import{discordNotificationAdapter,inAppNotificationAdapter}from'../../../../lib/notifications/adapters';export async function POST(){const payload={title:'Super App test',body:'Concise notification test.'};return NextResponse.json({inApp:await inAppNotificationAdapter.send(payload),discord:await discordNotificationAdapter.send(payload)})}
