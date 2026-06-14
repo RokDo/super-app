@@ -16,7 +16,7 @@ describe('production readiness', () => {
 
   it('OpenRouter adapter sends configured headers and model', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ id: 'r1', model: 'openrouter/free', choices: [{ message: { content: 'ok' }, finish_reason: 'stop' }] }) }));
-    const provider = createOpenRouterProvider({ AI_PROVIDER: 'openrouter', OPENROUTER_API_KEY: 'secret', OPENROUTER_BASE_URL: 'https://openrouter.ai/api/v1', OPENROUTER_SITE_URL: 'https://app.example.com', OPENROUTER_APP_NAME: 'Super App', AI_REASONING_MODEL: 'openrouter/free', AI_FAST_MODEL: 'openrouter/free', AI_FALLBACK_MODEL: 'openrouter/free' });
+    const provider = createOpenRouterProvider({ AI_PROVIDER: 'openrouter', OPENROUTER_API_KEY: 'secret', OPENROUTER_BASE_URL: 'https://openrouter.ai/api/v1', OPENROUTER_SITE_URL: 'https://app.example.com', OPENROUTER_APP_NAME: 'Super App', AI_REASONING_MODEL: 'openrouter/free', AI_FAST_MODEL: 'openrouter/free', AI_FALLBACK_MODEL: 'openrouter/free' } as unknown as NodeJS.ProcessEnv);
     await provider.generateText({ modelRole: 'reasoning', messages: [{ role: 'user', content: 'hello' }] });
     const [, init] = (fetch as any).mock.calls[0];
     expect(init.headers.Authorization).toBe('Bearer secret');
